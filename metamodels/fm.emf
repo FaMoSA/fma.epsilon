@@ -1,0 +1,88 @@
+@namespace(
+	uri="http://famosa.github.io/fm/1.0/fm",
+	prefix="fm")
+package fm;
+
+
+// Feature Model
+// =============
+
+class FeatureModel extends NamedElement {
+	val FeatureModelElement[*]  children;
+	val FeatureModelGraph[*]	graphs;			// cross-tree constraints
+	val FeatureModelRule[*] 	constraints; 	// free-form constraints
+}
+
+abstract class FeatureModelElement extends NamedElement {
+
+	// id
+	attr String ~id;
+	
+	// short name
+	attr String shortName;
+
+	// types	
+	attr Boolean ~abstract;  // the name is abstract
+	attr Boolean mandatory;
+	attr Boolean selected;
+	attr Boolean nonSelectable;
+}
+
+abstract class Graph extends NamedElement {
+	ref FeatureModelElement source;
+	ref FeatureModelElement target;
+}
+
+abstract class FeatureGroup extends FeatureModelElement {
+	val FeatureModelElement[*]#parent children;
+	ref FeatureModelElement#children parent;	
+}
+
+// -- features
+
+class Feature extends FeatureModelElement {
+	ref FeatureModelElement#children parent; 
+}
+
+class AndFeatureGroup extends FeatureGroup { }		// And / Aggregation
+class OrFeatureGroup extends FeatureGroup { }		// Or	(one or more)
+class AltFeatureGroup extends FeatureGroup { }		// Alt	(just one)
+
+// -- cross-tree constraints (requires, excludes) 
+
+abstract class FeatureModelGraph extends Graph { }
+
+class RequiresGraph extends FeatureModelGraph { } 
+class ExcludesGraph extends FeatureModelGraph { }
+
+// -- free-form constraints (and, or, then)
+
+class FeatureModelRule { }
+
+class BinaryRule extends FeatureModelRule {
+	val FeatureModelRule leftRule;
+	val FeatureModelRule rightRule;
+}
+
+class FeatureReference extends FeatureModelRule {
+	attr String name;
+}
+
+class Not extends FeatureModelRule {
+	val FeatureModelRule rule;
+}
+
+class Conj extends BinaryRule { }
+class Disj extends BinaryRule { }
+class Imp extends BinaryRule { }
+class Eq extends BinaryRule { }
+
+
+
+// Common Meta-Classes
+// ===================
+
+abstract class NamedElement {
+	attr String name;	
+}
+

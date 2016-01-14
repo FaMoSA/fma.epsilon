@@ -1,0 +1,14 @@
+@namespace(
+	uri="http://famosa.github.io/fm/1.0/config",
+	prefix="config")
+package config;
+
+abstract class NamedElement {
+	attr String name;	
+}
+
+class Configuration extends NamedElement {
+	val Option[*]	options;
+}
+
+class Option extends NamedElement { }

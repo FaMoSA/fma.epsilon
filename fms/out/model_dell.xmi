@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fm:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="http://famosa.github.io/fm/1.0/fm" name="Imported FM">
+  <children xsi:type="fm:AndFeatureGroup" name="DellLaptops_Notebooks" abstract="false" mandatory="true">
+    <children xsi:type="fm:AltFeatureGroup" name="ProductCategory" abstract="false" mandatory="true">
+      <children xsi:type="fm:Feature" name="MiniNotebooks"/>
+      <children xsi:type="fm:Feature" name="InspironLaptops"/>
+      <children xsi:type="fm:Feature" name="StudioLaptops"/>
+      <children xsi:type="fm:Feature" name="XPSLaptops"/>
+      <children xsi:type="fm:Feature" name="Adamo"/>
+      <children xsi:type="fm:Feature" name="StudioXPSLaptops"/>
+    </children>
+    <children xsi:type="fm:AltFeatureGroup" name="OperatingSystem" abstract="false" mandatory="true">
+      <children xsi:type="fm:Feature" name="WindowsVista64bit"/>
+      <children xsi:type="fm:Feature" name="WindowsXPHome"/>
+      <children xsi:type="fm:Feature" name="UbuntuLinux"/>
+      <children xsi:type="fm:Feature" name="Windows7"/>
+      <children xsi:type="fm:Feature" name="Windows8"/>
+    </children>
+    <children xsi:type="fm:AltFeatureGroup" name="HardDrive" abstract="false" mandatory="true">
+      <children xsi:type="fm:Feature" name="a500GB"/>
+      <children xsi:type="fm:Feature" name="a320GB"/>
+      <children xsi:type="fm:Feature" name="a250GB"/>
+      <children xsi:type="fm:Feature" name="a160GB"/>
+      <children xsi:type="fm:Feature" name="a128GBSolidState"/>
+      <children xsi:type="fm:Feature" name="a120GB"/>
+      <children xsi:type="fm:Feature" name="a80GB"/>
+    </children>
+    <children xsi:type="fm:AltFeatureGroup" name="OpticalDrive" abstract="false" mandatory="false">
+      <children xsi:type="fm:Feature" name="CD_DVD_RW"/>
+      <children xsi:type="fm:Feature" name="DVD_ROMDriveandDVD__RW"/>
+      <children xsi:type="fm:Feature" name="DVD__RWandCD_RWCombo"/>
+      <children xsi:type="fm:Feature" name="BluRayDisc"/>
+    </children>
+    <children xsi:type="fm:AltFeatureGroup" name="LaptopWeight" abstract="false" mandatory="true">
+      <children xsi:type="fm:Feature" name="UltraLight"/>
+      <children xsi:type="fm:Feature" name="Light"/>
+      <children xsi:type="fm:Feature" name="DesktopReplacement"/>
+    </children>
+    <children xsi:type="fm:AltFeatureGroup" name="Memory" abstract="false" mandatory="true">
+      <children xsi:type="fm:Feature" name="Morethan4GB"/>
+      <children xsi:type="fm:Feature" name="a4GB"/>
+      <children xsi:type="fm:Feature" name="a3GB"/>
+      <children xsi:type="fm:Feature" name="a2GB"/>
+      <children xsi:type="fm:Feature" name="a1GB"/>
+    </children>
+    <children xsi:type="fm:AltFeatureGroup" name="Processor" abstract="false" mandatory="true">
+      <children xsi:type="fm:Feature" name="IntelCore2Duo"/>
+      <children xsi:type="fm:Feature" name="IntelPentiumDualcore"/>
+      <children xsi:type="fm:Feature" name="IntelCeleron"/>
+      <children xsi:type="fm:Feature" name="IntelAtom"/>
+    </children>
+    <children xsi:type="fm:AltFeatureGroup" name="Price" abstract="false" mandatory="true">
+      <children xsi:type="fm:Feature" name="Lessthan_400"/>
+      <children xsi:type="fm:Feature" name="_400__800"/>
+      <children xsi:type="fm:Feature" name="_800__1200"/>
+      <children xsi:type="fm:Feature" name="Morethan_1200"/>
+    </children>
+  </children>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD__RWandCD_RWCombo"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a2GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a80GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD_ROMDriveandDVD__RW"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a128GBSolidState"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a120GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="UbuntuLinux"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a160GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelCeleron"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelPentiumDualcore"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a1GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="UbuntuLinux"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a500GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a320GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelAtom"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Lessthan_400"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="WindowsXPHome"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a160GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a250GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a80GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a120GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan4GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a1GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="UltraLight"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DesktopReplacement"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="WindowsXPHome"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelAtom"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan_1200"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="UbuntuLinux"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a160GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a128GBSolidState"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a120GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a80GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan4GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a2GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a1GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelCeleron"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelAtom"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Lessthan_400"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan_1200"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="XPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="WindowsXPHome"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="BluRayDisc"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD__RWandCD_RWCombo"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD_ROMDriveandDVD__RW"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a80GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="BluRayDisc"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD__RWandCD_RWCombo"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD_ROMDriveandDVD__RW"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="WindowsXPHome"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="WindowsVista64bit"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan_1200"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a80GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a120GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a128GBSolidState"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="InspironLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="UbuntuLinux"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan_1200"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelPentiumDualcore"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelCore2Duo"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="_800__1200"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelCeleron"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Light"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="BluRayDisc"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan4GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DesktopReplacement"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a3GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a4GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="BluRayDisc"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DesktopReplacement"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD__RWandCD_RWCombo"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan4GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD_ROMDriveandDVD__RW"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="CD_DVD_RW"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DesktopReplacement"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Light"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="_400__800"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Lessthan_400"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Morethan4GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelAtom"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelCeleron"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelPentiumDualcore"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelPentiumDualcore"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a1GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelCeleron"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a2GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a3GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a1GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a3GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a128GBSolidState"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Lessthan_400"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a250GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="IntelAtom"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a320GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="_800__1200"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a500GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="Adamo"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="_400__800"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD__RWandCD_RWCombo"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="DVD_ROMDriveandDVD__RW"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="CD_DVD_RW"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="WindowsXPHome"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="UbuntuLinux"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a250GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a160GB"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="MiniNotebooks"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="WindowsVista64bit"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a128GBSolidState"/>
+    </rightRule>
+  </constraints>
+  <constraints xsi:type="fm:Disj">
+    <leftRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="StudioXPSLaptops"/>
+    </leftRule>
+    <rightRule xsi:type="fm:Not">
+      <rule xsi:type="fm:FeatureReference" name="a120GB"/>
+    </rightRule>
+  </constraints>
+</fm:FeatureModel>

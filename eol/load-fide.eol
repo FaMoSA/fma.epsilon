@@ -1,0 +1,142 @@
+"Loading feature model".println();
+var target = XML.root.createModel();
+"Done".println();
+
+
+// ===
+
+operation XML!t_featureModel createModel( ) : FIDE!FeatureModel {
+	return self.createModel('');
+}
+
+operation XML!t_featureModel createModel( prefix : String ) : FIDE!FeatureModel {
+
+	var fmSource	= new FIDE!FeatureModel;
+  	fmSource.name = 'Imported FM';
+  
+	for ( element in self.children ) {
+
+		// structure of the feature model
+		if ( element.isTypeOf( XML!t_struct ) ) {
+			for ( feature in element.children ) {		
+				if ( feature.isDefined() ) {
+					var source = feature.getEquivalent( prefix );
+					fmSource.children.add( source );
+				}
+			}
+		}
+		
+		// set of constraints
+		if ( element.isTypeOf( XML!t_constraints ) ) {
+			// transform each rule 
+			for ( rule in element.children ) {
+				fmSource.constraints.add( rule.children.first().getEquivalent( prefix ));
+			}
+		}		
+	}
+
+	return fmSource;
+}
+
+operation XML!t_and getEquivalent( prefix : String ) : FIDE!AndFeatureGroup {
+
+	var fmAnd = new FIDE!AndFeatureGroup;
+
+	fmAnd.name 			= prefix + self.s_name;
+	fmAnd.mandatory		= self.b_mandatory;
+	fmAnd.abstract		= self.b_abstact;
+  
+  	for ( feature in self.children ) {
+  		if ( feature.isDefined() ) {
+			fmAnd.children.add( feature.getEquivalent( prefix ));
+		}
+	}
+	
+	return fmAnd;
+}
+  
+operation XML!t_alt getEquivalent( prefix : String ) : FIDE!AltFeatureGroup {
+
+	var fmAlt = new FIDE!AltFeatureGroup;
+
+	fmAlt.name 			= prefix + self.s_name;
+	fmAlt.mandatory		= self.b_mandatory;
+	fmAlt.abstract		= self.b_abstact;
+  
+  	for ( feature in self.children ) {
+  		if ( feature.isDefined() ) {
+			fmAlt.children.add( feature.getEquivalent( prefix ));
+		}
+	}
+
+	return fmAlt;
+}
+
+operation XML!t_or getEquivalent( prefix : String ) : FIDE!OrFeatureGroup {
+
+	var fmOr = new FIDE!OrFeatureGroup;
+
+	fmOr.name 			= prefix + self.s_name;
+	fmOr.mandatory		= self.b_mandatory;
+	fmOr.abstract		= self.b_abstact;
+  
+  	for ( feature in self.children ) {
+  		if ( feature.isDefined() ) {
+			fmOr.children.add( feature.getEquivalent( prefix ));
+		}
+	}
+
+	return fmOr;
+}
+
+operation XML!t_feature getEquivalent( prefix : String ) : FIDE!Feature {
+
+	var fmFeature = new  FIDE!Feature;	
+  	fmFeature.name		= prefix + self.s_name;
+
+	return fmFeature;  	  	
+}
+
+// Constraints
+// ===========
+
+operation XML!t_conj getEquivalent( prefix : String ) : FIDE!Conj {
+	var fmConj = new FIDE!Conj;
+	fmConj.leftRule = self.children.at(0).getEquivalent( prefix );
+	fmConj.rightRule = self.children.at(1).getEquivalent( prefix );
+	return fmConj;
+}
+
+operation XML!t_disj getEquivalent( prefix : String ) : FIDE!Disj {
+	var fmDisj = new FIDE!Disj;
+	fmDisj.leftRule = self.children.at(0).getEquivalent( prefix );
+	fmDisj.rightRule = self.children.at(1).getEquivalent( prefix );
+	return fmDisj;
+}
+
+operation XML!t_eq getEquivalent( prefix : String ) : FIDE!Eq {
+	var fmEq = new FIDE!Eq;
+	fmEq.leftRule = self.children.at(0).getEquivalent( prefix );
+	fmEq.rightRule = self.children.at(1).getEquivalent( prefix );
+	return fmEq;	
+}
+
+operation XML!t_imp getEquivalent( prefix : String ) : FIDE!Imp {
+	var fmImp = new FIDE!Imp;
+	fmImp.leftRule = self.children.at(0).getEquivalent( prefix );
+	fmImp.rightRule = self.children.at(1).getEquivalent( prefix );
+	return fmImp;	
+}
+
+operation XML!t_not getEquivalent( prefix : String ) : FIDE!Not {
+	var fmNot = new FIDE!Not;
+	fmNot.rule = self.children.first().getEquivalent( prefix );
+	return fmNot;
+}
+
+operation XML!t_var getEquivalent( prefix : String ) : FIDE!FeatureReference {
+	var fmVar = new FIDE!FeatureReference;
+	fmVar.name = prefix + self.text;
+	return fmVar;
+}
+

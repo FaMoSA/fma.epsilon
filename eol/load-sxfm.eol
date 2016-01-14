@@ -1,0 +1,197 @@
+"Loading feature model".println();
+
+var target = t_feature_model.all.first().createModel();
+
+"Done".println();
+
+
+// ===
+
+operation XML!t_feature_model createModel( ) : FIDE!FeatureModel {
+	return self.createModel('');
+}
+
+operation XML!t_feature_model createModel( prefix : String ) : FIDE!FeatureModel {
+
+	var fmSource	= new FIDE!FeatureModel;
+  	fmSource.name = 'Imported FM';
+  
+	for ( element in self.children ) {
+
+		// structure of the feature model
+		if ( element.isTypeOf( XML!t_feature_tree ) ) {
+			processTree(fmSource, element.text);
+		}
+		
+		// set of constraints
+		if ( element.isTypeOf( XML!t_constraints ) ) {
+			processConstraints(fmSource, element.text);
+		}		
+	}
+
+	return fmSource;
+}
+
+
+operation processTree( fm : FIDE!FeatureModel, treeText : String ) : FIDE!FeatureModel {
+
+	var nodeStack = new Sequence();
+	var lines = treeText.split("\n");
+	
+	for( line : String in lines ) {
+		if (line.indexOf(":") > -1 ) {
+		
+			var level : Integer = countTabs(line);
+			var feature : FIDE!FeatureModelElement = processLine(line);
+			
+			if ( level = 0 ) {
+				fm.children.add(feature);
+				nodeStack.add(feature);
+				
+			}
+			if (level > 0 ) {
+				var curLevel : Integer = nodeStack.size() - 1;
+				if (level > curLevel) {
+					var node : FIDE!FeatureModelElement = nodeStack.last();
+					node.children.add(feature);
+					nodeStack.add(feature);
+					
+				} 
+				if (level = curLevel) {
+					nodeStack.removeAt( nodeStack.indexOf(nodeStack.last()) );
+					var node : FIDE!FeatureModelElement = nodeStack.last();
+					node.children.add(feature);
+					nodeStack.add(feature);
+										
+				} 
+				if (level < curLevel) {
+					var countPops = curLevel - level + 1;
+					for ( i in Sequence{1 .. countPops} ) {
+						nodeStack.removeAt( nodeStack.indexOf(nodeStack.last()) );
+					}
+					var node : FIDE!FeatureModelElement = nodeStack.last();
+					node.children.add(feature);
+					nodeStack.add(feature);
+										
+				}
+			}
+		}
+	}
+
+	return fm;
+}
+
+operation countTabs( line : String ) : Integer  {
+	var count : Integer = 0;
+	var index : Integer = line.indexOf("\t");
+	while ( index <> -1 ) {
+		count = count + 1;
+		index = line.indexOf( "\t", index+1 );
+	}
+	return count;
+}
+
+operation processLine( line : String ) : FIDE!FeatureModelElement {
+	var index : Integer = line.indexOf(":");
+	var nodeType : String = line.substring(index + 1, index + 2);
+	
+	var index1 : Integer = line.indexOf("(");
+	var index2 : Integer = line.indexOf(")");
+
+	var featureId : String = line.substring(index + 2, index1).trim();
+	var featureName : String = line.substring(index1 + 1, index2).trim();
+	if (featureId.length() = 0 ) {
+		featureId = featureName.replace( " ", "_" );
+	}
+	
+	var feature : FIDE!FeatureModelElement;
+	switch(nodeType) {
+		case "r":
+			feature 			= new FIDE!AndFeatureGroup();
+			feature.id			= featureId;
+			feature.name		= featureName;
+			feature.abstract 	= false;
+			feature.mandatory	= true;
+			break;
+		case "m":
+			feature 			= new FIDE!AndFeatureGroup();
+			feature.id			= featureId;
+			feature.name		= featureName;
+			feature.abstract 	= false;
+			feature.mandatory	= true;
+			break;
+		case "o":
+			feature 			= new FIDE!AndFeatureGroup();
+			feature.id			= featureId;
+			feature.name		= featureName;			
+			feature.abstract 	= false;
+			feature.mandatory	= false;
+			break;
+		case "g":
+			var index4 : Integer = line.indexOf(",");			
+			var index5 : Integer = line.indexOf("]");
+			var upperBound : String = line.substring(index4 + 1, index5).trim();
+			if (upperBound = "*") {
+				feature 			= new FIDE!OrFeatureGroup();
+				feature.id			= featureId;
+				feature.abstract 	= false;
+				feature.mandatory	= true;							
+			} else {
+				feature				= new FIDE!AltFeatureGroup();
+				feature.id			= featureId;
+				feature.abstract 	= false;
+				feature.mandatory	= true;							
+			}
+			break;
+		default:
+			feature 			= new FIDE!Feature();
+			feature.id			= featureId;
+			feature.name		= featureName;			
+			feature.abstract 	= false;
+			feature.mandatory	= false;
+			break;		
+	}
+	
+	return feature;
+}
+
+operation processConstraints(fm : FIDE!FeatureModel, constraints : String ) : FIDE!FeatureModel {
+	var lines = constraints.split("\n");
+	
+	for( line : String in lines ) {
+		if (line.indexOf(":") > -1 ) {
+		
+			var index 		= line.indexOf(":");
+			// var name  		= line.substring(0, index).trim();
+			var constraint	= line.substring(index + 1).trim();
+		
+			fm.constraints.add(processConstraint(constraint));
+		}
+	}
+	
+	return fm;
+}
+
+operation processConstraint(constraint : String): FIDE!FeatureModelRule {
+
+	var term : FIDE!FeatureModelRule; 
+
+	var index : Integer = constraint.indexOf(" or ");
+	if (index > -1 ) {
+		term = new FIDE!Disj();
+		term.leftRule 	= processConstraint(constraint.substring(0, index));
+		term.rightRule	= processConstraint(constraint.substring(index+4));
+		
+	} else {
+		var text : String = constraint.trim();
+		if ( text.startsWith("~")) {
+			term = new FIDE!Not();
+			term.rule	= processConstraint(constraint.substring(1));
+		} else {
+			term = new FIDE!FeatureReference();
+			term.name = text;
+		}
+	}
+	
+	return term;
+}

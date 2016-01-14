@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fm" nsURI="http://famosa.github.io/fm/1.0/fm" nsPrefix="fm">
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureModel" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//FeatureModelElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graphs" upperBound="-1"
+        eType="#//FeatureModelGraph" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//FeatureModelRule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureModelElement" abstract="true"
+      eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonSelectable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Graph" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FeatureModelElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//FeatureModelElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureGroup" abstract="true" eSuperTypes="#//FeatureModelElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//FeatureModelElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//FeatureModelElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//FeatureModelElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//FeatureModelElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AndFeatureGroup" eSuperTypes="#//FeatureGroup"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrFeatureGroup" eSuperTypes="#//FeatureGroup"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AltFeatureGroup" eSuperTypes="#//FeatureGroup"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureModelGraph" abstract="true" eSuperTypes="#//Graph"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiresGraph" eSuperTypes="#//FeatureModelGraph"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExcludesGraph" eSuperTypes="#//FeatureModelGraph"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureModelRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryRule" eSuperTypes="#//FeatureModelRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftRule" eType="#//FeatureModelRule"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightRule" eType="#//FeatureModelRule"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureReference" eSuperTypes="#//FeatureModelRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//FeatureModelRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="#//FeatureModelRule"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Conj" eSuperTypes="#//BinaryRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Disj" eSuperTypes="#//BinaryRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Imp" eSuperTypes="#//BinaryRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Eq" eSuperTypes="#//BinaryRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
