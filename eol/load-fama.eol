@@ -1,0 +1,125 @@
+"Loading feature model".println();
+var target = XML.root.createModel();
+"Done".println();
+
+operation XML!`t_feature-model` createModel( ) : FAMA!FeatureModel {
+	return self.createModel('');
+}
+
+operation XML!`t_feature-model` createModel( prefix : String ) : FAMA!FeatureModel {
+	var fmSource	= new FAMA!FeatureModel;
+  	fmSource.name = 'Imported FM';
+
+	for ( element in self.children ) {
+
+		// structure of the feature model
+		if ( element.isTypeOf( XML!t_feature ) ) {
+			var source = element.getEquivalent( prefix );
+			fmSource.root =  source;
+		}
+		
+		// set of constraints
+		if ( element.isTypeOf( XML!t_requires ) or element.isTypeOf( XML!t_excludes) ) {
+			fmSource.dependencies.add( element.getEquivalent( prefix ));
+		}		
+	}
+
+	return fmSource;
+}
+
+operation XML!t_feature getEquivalent( prefix : String ) : FAMA!Feature {
+	var feature = new FAMA!Feature;
+	feature.name = prefix + self.s_name;
+	
+  	for ( relation in self.children ) {
+  		if ( relation.isDefined() ) {
+			feature.relations.add( relation.getEquivalent( prefix ));
+		}
+	}
+	
+	return feature;	
+}
+
+operation XML!t_solitaryFeature getEquivalent( prefix : String ) : FAMA!Feature {
+	var feature = new FAMA!SolitaryFeature;
+	feature.name = prefix + self.s_name;
+	
+  	for ( relation in self.children ) {
+  		if ( relation.isDefined() ) {
+			feature.relations.add( relation.getEquivalent( prefix ));
+		}
+	}
+	
+	return feature;	
+}
+
+operation XML!t_binaryRelation getEquivalent( prefix : String ) : FAMA!BinaryRelation {
+	var relation = new FAMA!BinaryRelation;
+	
+	for ( element in self.children ) {
+		if ( element.isTypeOf( XML!t_cardinality) ) {
+			relation.cardinality = new FAMA!Cardinality;
+			relation.cardinality.min = element.i_min;
+			relation.cardinality.max = element.i_max;
+		} else {
+			relation.destination.add( element.getEquivalent(prefix) );
+		}
+	}
+	
+	return relation;
+}
+
+operation XML!t_setRelation getEquivalent( prefix : String ) : FAMA!SetRelation {
+	var relation = new FAMA!SetRelation;
+	
+	for ( element in self.children ) {
+		if ( element.isTypeOf( XML!t_cardinality) ) {
+			relation.cardinality = new FAMA!Cardinality;
+			relation.cardinality.min = element.i_min;
+			relation.cardinality.max = element.i_max;
+		} else {
+			relation.destination.add( element.getEquivalent(prefix) );
+		}
+	}
+		
+	return relation;
+}
+
+operation XML!t_groupedFeature getEquivalent( prefix : String ) : FAMA!Feature {
+	var feature = new FAMA!GroupedFeature;
+	feature.name = prefix + self.s_name;
+	
+  	for ( relation in self.children ) {
+  		if ( relation.isDefined() ) {
+			feature.relations.add( relation.getEquivalent( prefix ));
+		}
+	}
+	
+	return feature;	
+}
+
+operation XML!t_excludes getEquivalent( prefix : String ) : FAMA!ExcludesDependency {
+	
+	var feature = FAMA!Feature.all.select( f | f.name = self.s_feature ).first();
+	var excludes = FAMA!Feature.all.select( f | f.name = self.s_excludes ).first();
+	
+	var dep = new FAMA!ExcludesDependency;
+	dep.name = prefix + self.s_name;
+	dep.origin = feature;
+	dep.destination = excludes;
+	
+	return dep;
+}
+
+operation XML!t_requires getEquivalent( prefix : String ) : FAMA!RequiresDependency {
+	
+	var feature = FAMA!Feature.all.select( f | f.name = self.s_feature ).first();
+	var requires = FAMA!Feature.all.select( f | f.name = self.s_requires ).first();
+	
+	var dep = new FAMA!RequiresDependency;
+	dep.name = prefix + self.s_name;
+	dep.origin = feature;
+	dep.destination = requires;
+	
+	return dep;
+}

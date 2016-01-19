@@ -1,0 +1,50 @@
+@namespace(
+	uri="http://famosa.github.io/fm/1.0/fama-fm",
+	prefix="fama-fm")
+package fama_fm;
+
+
+// Feature Model
+// =============
+
+class FeatureModel extends NamedElement {
+	val Feature 		root;
+	val Dependency[*]	dependencies;
+}
+
+class Feature extends NamedElement {
+	ref Relation	parentRelationship;
+	val Relation[*] relations;	
+}
+
+class SolitaryFeature extends Feature {}
+class GroupedFeature extends Feature {}
+
+class Relation extends NamedElement {
+	val Cardinality	cardinality;
+	ref Feature		parentFeature;
+	val Feature[*]	destination;
+}
+
+class BinaryRelation extends Relation {}
+class SetRelation extends Relation {}
+
+class Cardinality {
+	attr Integer	min;
+	attr Integer	max;
+}
+
+class Dependency extends NamedElement {
+	ref Feature		origin;
+	ref Feature		destination;
+}
+
+class RequiresDependency extends Dependency {}
+class ExcludesDependency extends Dependency {}
+
+// Common Meta-Classes
+// ===================
+
+abstract class NamedElement {
+	attr String name;	
+}
