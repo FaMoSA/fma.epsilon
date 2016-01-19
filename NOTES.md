@@ -16,7 +16,7 @@ Although some version of the plugin included an XML schema, currently the file f
 
 ### Splot (SXFM)
 
-[SXFM](http://ec2-52-32-1-180.us-west-2.compute.amazonaws.com:8080/SPLOT/sxfm.html) (Simple XML Feature Model Format) is the file format used by [SPLOT](http://www.splot-research.org/). Although SXFM is an XML-based file format for Feature Models, the tree structure and the constraints are written as a text inside some XML entities. It is necessary to use a parser to get the tree structure and the constraints.
+[SXFM](http://www.splot-research.org/sxfm.html) (Simple XML Feature Model Format) is the file format used by [SPLOT](http://www.splot-research.org/). Although SXFM is an XML-based file format for Feature Models, the tree structure and the constraints are written as a text inside some XML entities. It is necessary to use a parser to get the tree structure and the constraints.
 
   * Feature model must have a name and may include a set of meta-data.
   * Features, Feature Groups may have an optional name and a mandatory ID. 
