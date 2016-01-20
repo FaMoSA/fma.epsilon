@@ -1,0 +1,117 @@
+pre {
+	"Loading feature model".println();
+}
+
+rule featureModel
+  transform fideFm :  XML!t_featureModel
+  to fm : FIDE!FeatureModel {
+
+  fm.name = 'Imported FM';
+
+  // root
+  fm.root ::= fideFm.children.select( x | x.isTypeOf( XML!t_struct ) ).first().children.first();
+	
+  // set of constraints
+  for ( r in XML!t_rule.all ) {
+	fm.constraints.add( r.children.first().equivalent() );
+  }
+}
+
+rule andFeatureGroup
+  transform fideAnd : XML!t_and
+  to fmAnd : FIDE!AndFeatureGroup {
+ 
+  fmAnd.name 		= fideAnd.s_name;
+  fmAnd.mandatory	= fideAnd.b_mandatory;
+  fmAnd.`abstract`	= fideAnd.b_abstract;
+  
+  for( feature in fideAnd.children.select( x | x.isDefined() ) ) {
+  	fmAnd.children.add( feature.equivalent() );
+  }
+}
+
+rule altFeatureGroup
+  transform fideAlt : XML!t_alt
+  to fmAlt : FIDE!AltFeatureGroup {
+ 
+  fmAlt.name 		= fideAlt.s_name;
+  fmAlt.mandatory	= fideAlt.b_mandatory;
+  fmAlt.`abstract`	= fideAlt.b_abstract;
+  
+  for( feature in fideAlt.children.select( x | x.isDefined() ) ) {
+  	fmAlt.children.add( feature.equivalent() );
+  }
+}
+
+rule orFeatureGroup
+  transform fideOr : XML!t_or
+  to fmOr : FIDE!OrFeatureGroup {
+ 
+  fmOr.name 		= fideOr.s_name;
+  fmOr.mandatory	= fideOr.b_mandatory;
+  fmOr.`abstract`	= fideOr.b_abstract;
+  
+  for( feature in fideOr.children.select( x | x.isDefined() ) ) {
+  	fmOr.children.add( feature.equivalent() );
+  }
+}
+
+rule feature
+  transform fideFeature : XML!t_feature
+  to fmFeature : FIDE!Feature {
+
+  fmFeature.name = fideFeature.s_name;
+}
+
+// Constraints
+// ===========
+
+rule t_conj
+  transform fideConj : XML!t_conj
+  to fmConj : FIDE!Conj {
+
+  fmConj.leftRule ::= fideConj.children.at(0);
+  fmConj.rightRule ::= fideConj.children.at(1);
+}
+
+rule t_disj
+  transform fideDisj : XML!t_disj
+  to fmDisj : FIDE!Disj {
+
+  fmDisj.leftRule ::= fideDisj.children.at(0);
+  fmDisj.rightRule ::= fideDisj.children.at(1);
+}  
+
+rule t_eq
+  transform fideEq : XML!t_eq
+  to fmEq : FIDE!Eq {
+
+  fmEq.leftRule ::= fideEq.children.at(0);
+  fmEq.rightRule ::= fideEq.children.at(1);
+}  
+
+rule t_imp
+  transform fideImp : XML!t_imp
+  to fmImp : FIDE!Imp {
+
+  fmImp.leftRule ::= fideImp.children.at(0);
+  fmImp.rightRule ::= fideImp.children.at(1);
+}  
+
+rule t_not
+  transform fideNot : XML!t_not
+  to fmNot : FIDE!Not {
+
+  fmNot.`rule` ::= fideNot.children.at(0);
+}  
+
+rule t_var
+  transform fideVar : XML!t_var
+  to fmVar : FIDE!FeatureReference {
+
+  fmVar.name = fideVar.text;
+}  
+
+post {
+  "Done".println();
+}

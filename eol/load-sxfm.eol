@@ -45,7 +45,7 @@ operation processTree( fm : FIDE!FeatureModel, treeText : String ) : FIDE!Featur
 			var feature : FIDE!FeatureModelElement = processLine(line);
 			
 			if ( level = 0 ) {
-				fm.children.add(feature);
+				fm.root = feature;
 				nodeStack.add(feature);
 				
 			}

@@ -2,8 +2,8 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fm" nsURI="http://famosa.github.io/fm/1.0/fm" nsPrefix="fm">
   <eClassifiers xsi:type="ecore:EClass" name="FeatureModel" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//FeatureModelElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="#//FeatureModelElement"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="graphs" upperBound="-1"
         eType="#//FeatureModelGraph" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
@@ -28,6 +28,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//FeatureModelElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//FeatureModelElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//FeatureModelElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//FeatureModelElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AndFeatureGroup" eSuperTypes="#//FeatureGroup"/>

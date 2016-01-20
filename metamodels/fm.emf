@@ -8,7 +8,7 @@ package fm;
 // =============
 
 class FeatureModel extends NamedElement {
-	val FeatureModelElement[*]  children;
+	val FeatureModelElement  	root;
 	val FeatureModelGraph[*]	graphs;			// cross-tree constraints
 	val FeatureModelRule[*] 	constraints; 	// free-form constraints
 }
@@ -41,7 +41,8 @@ abstract class FeatureGroup extends FeatureModelElement {
 // -- features
 
 class Feature extends FeatureModelElement {
-	ref FeatureModelElement#children parent; 
+	val FeatureModelElement[*]#parent children;
+	ref FeatureModelElement#children parent;	
 }
 
 class AndFeatureGroup extends FeatureGroup { }		// And / Aggregation

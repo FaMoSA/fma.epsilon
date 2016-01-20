@@ -14,25 +14,13 @@ operation XML!t_featureModel createModel( prefix : String ) : FIDE!FeatureModel 
 	var fmSource	= new FIDE!FeatureModel;
   	fmSource.name = 'Imported FM';
   
-	for ( element in self.children ) {
-
-		// structure of the feature model
-		if ( element.isTypeOf( XML!t_struct ) ) {
-			for ( feature in element.children ) {		
-				if ( feature.isDefined() ) {
-					var source = feature.getEquivalent( prefix );
-					fmSource.children.add( source );
-				}
-			}
-		}
-		
-		// set of constraints
-		if ( element.isTypeOf( XML!t_constraints ) ) {
-			// transform each rule 
-			for ( rule in element.children ) {
-				fmSource.constraints.add( rule.children.first().getEquivalent( prefix ));
-			}
-		}		
+	// root
+	var element = self.children.select( x | x.isTypeOf( XML!t_struct ) ).first().children.first();
+	fmSource.root = element.getEquivalent( prefix );
+	
+	// set of constraints
+	for ( rule in  XML!t_rule.all ) {
+		fmSource.constraints.add( rule.children.first().getEquivalent( prefix ));
 	}
 
 	return fmSource;
