@@ -12,7 +12,7 @@ rule featureModel
   fm.root ::= sxfm.children.select( x | x.isTypeOf( XML!t_feature ) ).first();
 	
   // set of constraints
-  for (dep in sxfm.children.select( x | x.isTypeOf( XML!t_feature ) or x.isTypeOf( XML!t_excludes) ) ) {
+  for (dep in sxfm.children.select( x | x.isTypeOf( XML!t_requires ) or x.isTypeOf( XML!t_excludes) ) ) {
 	fm.dependencies.add( dep.equivalent() );
   }
 }
@@ -97,13 +97,13 @@ post {
 	"Updating dependencies".println();
 
 	for ( req in FAMA!RequiresDependency.all ) {
-	  req.feature = FAMA!Feature.all.select( f | f.name = req.~feature_name ).first();
-	  req.requires = FAMA!Feature.all.select( f | f.name = req.~requires_name ).first();
+	  req.origin = FAMA!Feature.all.select( f | f.name = req.~feature_name ).first();
+	  req.destination = FAMA!Feature.all.select( f | f.name = req.~requires_name ).first();
 	}
 
-	for ( exc in FAMA!RequiresDependency.all ) {
-	  exc.feature = FAMA!Feature.all.select( f | f.name = exc.~feature_name ).first();
-	  exc.excludes = FAMA!Feature.all.select( f | f.name = exc.~excludes_name ).first();
+	for ( exc in FAMA!ExcludesDependency.all ) {
+	  exc.origin = FAMA!Feature.all.select( f | f.name = exc.~feature_name ).first();
+	  exc.destination = FAMA!Feature.all.select( f | f.name = exc.~excludes_name ).first();
 	}
 
 	"Done".println();
